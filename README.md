@@ -2,10 +2,6 @@
 
 by [Gabriel Meseguer-Brocal](https://www.linkedin.com/in/gabriel-meseguer-brocal-1032a42b), [Dorian Desblancs](https://www.linkedin.com/in/dorian-desblancs), and [Romain Hennequin](http://romain-hennequin.fr/En/index.html).
 
-<p align="center">
-        <img src="https://github.com/deezer/multi-view-ssl-benchmark/blob/main/poster/poster.pdf" width="300">
-</p>
-
 ## About
 
 This repository contains the models and losses used to generate our results. All trained, self-supervised model weights can be found in the [Releases](https://github.com/deezer/multi-view-ssl-benchmark/releases) section of this repository.
