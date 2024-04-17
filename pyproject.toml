@@ -1,0 +1,75 @@
+[tool.poetry]
+name = "ssl_framework"
+version = "0.0.1"
+description = "Self-supervised benchmarks."
+authors = ["Research <research@deezer.com>"]
+readme = "README.md"
+repository = "https://github.com/deezer/multi-view-ssl-benchmark"
+homepage = "https://github.com/deezer/multi-view-ssl-benchmark"
+classifiers = [
+    "Environment :: Console",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Artistic Software",
+    "Topic :: Multimedia",
+    "Topic :: Multimedia :: Sound/Audio",
+    "Topic :: Multimedia :: Sound/Audio :: Analysis",
+    "Topic :: Multimedia :: Sound/Audio :: Conversion",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+    "Topic :: Software Development",
+]
+packages = [
+    { include = "ssl_framework" },
+]
+
+[tool.poetry.dependencies]
+python = "^3.9,<3.12"
+torch = "2.1.*"
+torchaudio = "2.1.*"
+torchvision = "0.16.*"
+tensorflow = "2.15.*"
+transformers = "^4.34.0"
+
+[tool.poetry.group.dev.dependencies]
+tqdm = "4.65.*"
+torchinfo = "1.7.*"
+matplotlib = "3.7.*"
+gin-config = "0.5.*"
+GPUtil = "1.4.*"
+einops = "0.6.*"
+scipy = "1.10.*"
+pandas = "1.5.*"
+openpyxl = "3.1.*"
+ipython = "8.12.*"
+ujson = "5.7.*"
+timm = "0.6.*"
+hvac = "1.1.*"
+audioread = "3.0.*"
+torchmetrics = "0.11.*"
+weightwatcher = "0.7.*"
+Unidecode = "1.3.*"
+mypy = "*"
+ruff = "*"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.mypy]
+strict = true
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E741", "E742", "E743", "F", "I"]
+ignore = ["T201", "T203"]
