@@ -2,6 +2,11 @@ import torch
 
 from ssl_framework.models import Backbone
 
+# Constants
+DURATION = 4
+SAMPLE_RATE = 16000
+WEIGHTS_PATH = "weights"
+
 
 def load_model(name: str) -> Backbone:
     """
@@ -16,8 +21,8 @@ def load_model(name: str) -> Backbone:
         Backbone:
             Pre-trained self-supervised model :)
     """
-    ssl_model = Backbone(mono=True, duration=4, sr=16000)
-    weights = torch.load(f"weights/{name}.pt", map_location=torch.device("cpu"))
+    ssl_model = Backbone(mono=True, duration=DURATION, sr=SAMPLE_RATE)
+    weights = torch.load(f"{WEIGHTS_PATH}/{name}.pt", map_location=torch.device("cpu"))
 
     if name in ["byol", "clustering"]:
         key_replace = "student.module.backbone."
