@@ -1,4 +1,9 @@
+import math
+from typing import Any
+
 import torch
+import torch.nn.functional as F
+import torchaudio  # type: ignore
 
 from ssl_framework.models import Backbone
 
@@ -6,6 +11,7 @@ from ssl_framework.models import Backbone
 DURATION = 4
 SAMPLE_RATE = 16000
 WEIGHTS_PATH = "weights"
+SEG_NUM_SAMPLES = SAMPLE_RATE * DURATION
 
 
 def load_model(name: str) -> Backbone:
@@ -38,6 +44,34 @@ def load_model(name: str) -> Backbone:
     return ssl_model
 
 
+def load_audio(path: str) -> Any:
+    """
+    Args:
+        path (str):
+            Audio file path.
+
+    Returns:
+        torch.Tensor:
+            Waveform.
+    """
+    waveform, sr_in = torchaudio.load(path, channels_first=False)
+
+    if len(waveform) == 0:
+        raise ValueError("No audio to process")
+
+    # Mono, resample, and normalize audio
+    waveform = torch.mean(waveform, dim=1).unsqueeze(-1)
+    waveform = torchaudio.functional.resample(waveform.T, sr_in, SAMPLE_RATE).T
+    waveform = waveform / waveform.abs().max()
+
+    # Pad to multiple of SEG_NUM_SAMPLES for batching
+    pad_sample = SEG_NUM_SAMPLES * math.ceil(waveform.shape[0] / SEG_NUM_SAMPLES)
+    waveform = F.pad(input=waveform, pad=(0, 0, 0, pad_sample - waveform.shape[0]), mode="constant", value=0)
+
+    return waveform
+
+
 if __name__ == "__main__":
     # Sample code
     model = load_model("barlow_twins")
+    waveform = load_audio("audio_example.mp3")
