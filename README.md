@@ -23,23 +23,9 @@ wget https://github.com/deezer/multi-view-ssl-benchmark/releases/download/v0.0.1
 unzip weights.zip
 ```
 
-One can then get started with the following Python code snippet to explore the self-supervised model outputs:
-
-```python
-import torch
-from ssl_framework.models import Backbone
-
-ssl_model = Backbone(mono=True, duration=4, sr=16000)
-weights = torch.load('weights/<model_name>.pt', map_location=torch.device('cpu'))
-
-# Use the following values for the following models:
-# barlow_twins, contrastive, and feature_stats: module.backbone.
-# byol and clustering: student.module.backbone.
-key_replace = <value>
-filtered_weights = {k.replace(key_replace, ""): v for k, v in weights["model"].items() if key_replace in k}
-
-# Load weights to model
-ssl_model.load_state_dict(filtered_weights, strict=True)
+Sample code for model weight loading, audio loading, and embedding computation can then be found in `usage/sample.py`! Use the following command to run it:
+```bash
+poetry run python -m usage.sample
 ```
 
 ## Other
@@ -61,4 +47,4 @@ If you use this repository, please consider citing:
 }
 ```
 
-Our paper can be found on [arXiv](https://arxiv.org/abs/2404.09177) 🌟
+Our paper can be found on [arXiv](https://arxiv.org/abs/2404.09177) 🌟 The poster we presented at ICASSP 2024 can be found in this repo 🗄️
