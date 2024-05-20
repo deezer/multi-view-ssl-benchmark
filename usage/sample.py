@@ -122,7 +122,6 @@ class SelfSupervisedFramework:
 
         if mean_embedding and embeddings is not None:
             embeddings = embeddings.mean(dim=0)
-            return embeddings
 
         return embeddings
 
